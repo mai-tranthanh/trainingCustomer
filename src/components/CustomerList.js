@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
 import Snackbar from "@material-ui/core/Snackbar";
+import TrainingList from "./TrainingList";
+import DeleteCustomer from "./DeleteCustomer";
 
 //use rcc snippet to auto-create class
 class CustomerList extends Component {
   constructor(props) {
     super(props);
-    this.state = { customers: [], open: false, message:'' };
+    this.state = { customers: [], trainings:[], open: false, message:'' };
   }
 
   //Fetch customers
@@ -29,7 +31,7 @@ class CustomerList extends Component {
     //To show/check the chosen customer in console: console.log(customerLink.original._links.self.href);
     fetch(customerLink, { method: "DELETE" })
       .then(res => this.loadCustomers())
-      .then(res => this.setSate({open: true, message: "customer Deleted"}))
+      .then(res => this.setSate({open: true, message: "Customer Deleted"}))
       .catch(err => console.error(err));
   };
 
@@ -58,6 +60,18 @@ class CustomerList extends Component {
       .then(res => this.setState({ open: true, message: "Customer Updated" }))
       .catch(err => console.error(err));
   };
+
+  loadTraining = (trainingLink) => {
+    fetch(trainingLink, {
+      method: "GET",
+      headers: {
+      "Content-Type": "application/json"
+      },
+    })
+    .then(response => response.json())
+    .then(jsondata => this.setState({ trainings: jsondata.content }))
+    .catch(err => console.error(err));
+  }
 
   handleClose = () => {
     this.setState({ open: false });
@@ -100,7 +114,7 @@ class CustomerList extends Component {
         sortable: false,
         width: 100,
         Cell: ({value, row}) => (
-          <EditCustomer updateCustomer={this.updateCustomer} link={value} customer={row}/>
+          <EditCustomer updateCustomerN={this.updateCustomer} link={value} customer={row}/>
         )
       },
       {
@@ -110,9 +124,10 @@ class CustomerList extends Component {
         sortable: false,
         width: 100,
         Cell: ({value}) => (
-          <Button color="secondary" onClick={() => this.deleteCustomer(value)}>
-            DELETE
-          </Button>
+          // <Button variant='outlined' color="secondary" onClick={() => this.deleteCustomer(value)}>
+          //   DELETE
+          // </Button>
+          <DeleteCustomer deleteCustomerN={this.deleteCustomer} link={value} />
         )
       },
       {
@@ -121,10 +136,8 @@ class CustomerList extends Component {
         filterable: false,
         sortable: false,
         width: 100,
-        Cell: ({value}) => (
-          <Button color="secondary" onClick={() => this.trainingCustomer(value)}>
-            TRAINING
-          </Button>
+        Cell: ({value, row}) => (
+          <TrainingList loadTrainingN={() => this.loadTraining(value)} customer={row}/> 
         )
       }
     ];
@@ -137,6 +150,7 @@ class CustomerList extends Component {
           columns={columns}
           sortable={true}
           filterable={true}
+          defaultPageSize= {10}
         />
 
         <Snackbar

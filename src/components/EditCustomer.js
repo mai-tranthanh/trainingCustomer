@@ -54,7 +54,7 @@ class EditCustomer extends Component {
         email: this.state.email,
         phone: this.state.phone,
       }
-      this.props.updateCustomer(this.props.link, newCustomer);
+      this.props.updateCustomerN(this.props.link, newCustomer);
       this.handleClose();
   }
 
@@ -136,7 +136,7 @@ class EditCustomer extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-        <Button onClick={this.handleClickOpen}>EDIT</Button>
+        <Button variant='contained' onClick={this.handleClickOpen}>EDIT</Button>
       </div>
     );
   }

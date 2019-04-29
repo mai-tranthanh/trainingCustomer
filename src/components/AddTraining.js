@@ -7,18 +7,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-class AddCustomer extends Component {
+class AddTraining extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      firstname: "",
-      lastname: "",
-      streetaddress: "",
-      postcode: "",
-      city: "",
-      email: "",
-      phone: "",
+      date: "",
+      duration: "",
+      activity: "",
     };
   }
 
@@ -35,17 +31,13 @@ class AddCustomer extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  addCustomer = () => {
-      const newCustomer= {
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        streetaddress: this.state.streetaddress,
-        postcode: this.state.postcode,
-        city: this.state.city,
-        email: this.state.email,
-        phone: this.state.phone
+  addTraining = () => {
+      const newTraining= {
+        date: this.state.date,
+        duration: this.state.duration,
+        activity: this.state.activity,
       }
-      this.props.saveCustomer(newCustomer);
+      this.props.saveTraining(newTraining);
       this.handleClose();
   }
 
@@ -57,57 +49,36 @@ class AddCustomer extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Customer</DialogTitle>
+          <DialogTitle id="form-dialog-title">New Training</DialogTitle>
           <DialogContent>
-            <DialogContentText>Fill Out Customer Information Here</DialogContentText>
+            <DialogContentText>Fill Out Training Information Here</DialogContentText>
             <TextField
               onChange={this.handleChange}
               autoFocus
               margin="dense"
-              name="firstname"
-              label="First Name"
+              name="date"
+              label="Date"
               fullWidth
             />
             <TextField
               onChange={this.handleChange}
               margin="dense"
-              name="lastname"
-              label="Last Name"
+              name="duration"
+              label="Duration"
               fullWidth
             />
             <TextField
               onChange={this.handleChange}
               margin="dense"
-              name="streetaddress"
-              label="Street Address"
+              name="activity"
+              label="Activity"
               fullWidth
             />
             <TextField
               onChange={this.handleChange}
               margin="dense"
-              name="postcode"
-              label="Postcode"
-              fullWidth
-            />
-            <TextField
-              onChange={this.handleChange}
-              margin="dense"
-              name="city"
-              label="City"
-              fullWidth
-            />
-            <TextField
-              onChange={this.handleChange}
-              margin="dense"
-              name="email"
-              label="Email"
-              fullWidth
-            />
-            <TextField
-              onChange={this.handleChange}
-              margin="dense"
-              name="phone"
-              label="Phone"
+              name="customerId"
+              label="Customer ID"
               fullWidth
             />
           </DialogContent>
@@ -115,16 +86,16 @@ class AddCustomer extends Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.addCustomer} color="primary">
+            <Button onClick={this.addTraining} color="primary">
               Add
             </Button>
           </DialogActions>
         </Dialog>
         <Button variant='outlined' color='inherit' style={{margin: 10}} 
-        onClick={this.handleClickOpen}>ADD NEW CUSTOMER</Button>
+        onClick={this.handleClickOpen}>ADD NEW TRAINING</Button>
       </div>
     );
   }
 }
 
-export default AddCustomer;
+export default AddTraining;
