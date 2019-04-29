@@ -23,7 +23,7 @@ class DeleteCustomer extends Component {
       };
 
     deleteCustomer = () => {
-      this.props.deleteCustomerN(this.props.value);
+      this.props.deleteCustomerN(this.props.link);
       this.handleClose();
     }
     

@@ -7,6 +7,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import AddTraining from "./AddTraining"
 
 class TrainingList extends Component {
   constructor(props) {
@@ -17,6 +18,10 @@ class TrainingList extends Component {
     };
   }
 
+  componentDidMount(){
+    this.loadTraining(this.props.link);
+  }
+
   // handle hidden
   handleClose = () => {
     this.setState({ open: false });
@@ -24,18 +29,36 @@ class TrainingList extends Component {
 
    // handle visible
    handleClickOpen = () => {
+   this.loadTraining(this.props.link);
     this.setState({ 
         open: true,
-        trainings: this.props.trainings
     });
-
-    console.log(this.props.link);
-    console.log(this.props.customer);
   };
 
-  loadTraining=() => {
-     this.props.loadTrainingN(this.props.link);
-   }
+  loadTraining = () => {
+    fetch("https://customerrest.herokuapp.com/api/customers/1/trainings", {
+      method: "GET",
+      headers: {
+      "Content-Type": "application/json"
+      },
+    })
+    .then(response => response.json())
+    .then(jsondata => this.setState({ trainings: jsondata.content }))
+    .catch(err => console.error(err));
+  }
+
+  updateTraining = (newTraining) => {
+    fetch("https://customerrest.herokuapp.com/api/customers/1/trainings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newTraining)
+    })
+      .then(res => this.loadTraining())
+      .then(res => console.log(res))
+      .catch(err => console.error(err));
+  };
   
   render() {
     const columns = [
@@ -50,7 +73,7 @@ class TrainingList extends Component {
              {
                Header: "Activity",
                accessor: "activity"
-             },
+             }
            ];
 
     return (
@@ -73,10 +96,12 @@ class TrainingList extends Component {
              /> 
           </DialogContent>
           <DialogActions>
+            <AddTraining updateTraining={this.updateTraining}/>
+
             <Button onClick={this.handleClose} color="primary">
               CLOSE
             </Button>
-      
+          
           </DialogActions>
         </Dialog>
 

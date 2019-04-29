@@ -4,7 +4,7 @@ import "./App.css";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import TrainingListAll from "./components/TrainingListAll";
+// import TrainingListAll from "./components/TrainingListAll";
 import PTCustomer from "./components/PTCustomer";
 
 class App extends Component {
@@ -19,14 +19,7 @@ class App extends Component {
           </Toolbar>
         </AppBar>
         <CustomerList />
-        <AppBar style={styles.navBar} position="static">
-          <Toolbar>
-            <Typography variant="h6" color="inherit">
-              TRAINING LIST
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <TrainingListAll />
+        
         <AppBar style={styles.navBar} position="static">
           <Toolbar>
             <Typography variant="h6" color="inherit">

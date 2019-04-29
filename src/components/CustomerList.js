@@ -12,7 +12,7 @@ import DeleteCustomer from "./DeleteCustomer";
 class CustomerList extends Component {
   constructor(props) {
     super(props);
-    this.state = { customers: [], trainings:[], open: false, message:'' };
+    this.state = { customers: [], open: false, message:'' };
   }
 
   //Fetch customers
@@ -27,7 +27,7 @@ class CustomerList extends Component {
       .catch(err => console.error(err));
   };
 
-  deleteCustomer = customerLink => {
+  deleteCustomer = (customerLink) => {
     //To show/check the chosen customer in console: console.log(customerLink.original._links.self.href);
     fetch(customerLink, { method: "DELETE" })
       .then(res => this.loadCustomers())
@@ -60,18 +60,6 @@ class CustomerList extends Component {
       .then(res => this.setState({ open: true, message: "Customer Updated" }))
       .catch(err => console.error(err));
   };
-
-  loadTraining = (trainingLink) => {
-    fetch(trainingLink, {
-      method: "GET",
-      headers: {
-      "Content-Type": "application/json"
-      },
-    })
-    .then(response => response.json())
-    .then(jsondata => this.setState({ trainings: jsondata.content }))
-    .catch(err => console.error(err));
-  }
 
   handleClose = () => {
     this.setState({ open: false });
@@ -136,8 +124,8 @@ class CustomerList extends Component {
         filterable: false,
         sortable: false,
         width: 100,
-        Cell: ({value, row}) => (
-          <TrainingList loadTrainingN={() => this.loadTraining(value)} customer={row}/> 
+        Cell: ({value}) => (
+          <TrainingList loadTrainingN={this.loadTraining} link={value}/> 
         )
       }
     ];

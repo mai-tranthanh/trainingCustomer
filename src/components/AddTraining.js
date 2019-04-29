@@ -15,6 +15,7 @@ class AddTraining extends Component {
       date: "",
       duration: "",
       activity: "",
+      session: []
     };
   }
 
@@ -37,7 +38,7 @@ class AddTraining extends Component {
         duration: this.state.duration,
         activity: this.state.activity,
       }
-      this.props.saveTraining(newTraining);
+      this.props.updateTraining(newTraining);
       this.handleClose();
   }
 
