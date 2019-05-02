@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-//use rcc snippet to auto-create class
+
 class PTCustomer extends Component {
   constructor(props) {
     super(props);
@@ -26,42 +26,42 @@ class PTCustomer extends Component {
       {
         id: 'customerId', // Required because our accessor is not a string
         Header: 'CustomerID',
-        // accessor: d => d.customer.id // Custom value accessors!
+        accessor: d => d.customer.id // Custom value accessors!
       },
       {
         id: 'firstName', 
         Header: 'Firstname',
-        // accessor: d => d.customer.firstname
+        accessor: d => d.customer.firstname
       },
       {
         id: 'lastName', 
         Header: "Lastname",
-        // accessor: d => d.customer.lastname
+        accessor: d => d.customer.lastname
       },
       {
         id: 'address', 
         Header: "Street Address",
-        // accessor: d => d.customer.streetaddress
+        accessor: d => d.customer.streetaddress
       },
       {
         id: 'postcode', 
         Header: "Postcode",
-        // accessor: d => d.customer.postcode
+        accessor: d => d.customer.postcode
       },
       {
         id: 'city', 
         Header: "City",
-        // accessor: d => d.customer.city
+        accessor: d => d.customer.city
       },
       {
         id: 'cmail', 
         Header: "Email",
-        // accessor: d => d.customer.email
+        accessor: d => d.customer.email
       },
       {
         id: 'phone', 
         Header: "Phone",
-        // accessor: d => d.customer.phone
+        accessor: d => d.customer.phone
       },
       {
         Header: "Date",

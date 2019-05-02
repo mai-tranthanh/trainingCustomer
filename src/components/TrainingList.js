@@ -8,12 +8,15 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import AddTraining from "./AddTraining"
+import DeleteTraining from "./DeleteTraining"
+
 
 class TrainingList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
+      message:'',
       trainings: []
     };
   }
@@ -33,10 +36,12 @@ class TrainingList extends Component {
     this.setState({ 
         open: true,
     });
+    console.log(this.props.link);
+    console.log(this.props.trainings);
   };
 
   loadTraining = () => {
-    fetch("https://customerrest.herokuapp.com/api/customers/1/trainings", {
+    fetch(this.props.link, {
       method: "GET",
       headers: {
       "Content-Type": "application/json"
@@ -48,7 +53,7 @@ class TrainingList extends Component {
   }
 
   updateTraining = (newTraining) => {
-    fetch("https://customerrest.herokuapp.com/api/customers/1/trainings", {
+    fetch(this.props.link, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -57,6 +62,14 @@ class TrainingList extends Component {
     })
       .then(res => this.loadTraining())
       .then(res => console.log(res))
+      .catch(err => console.error(err));
+  };
+
+  deleteTraining = (customerLink) => {
+    //To show/check the chosen customer in console: console.log(customerLink.original._links.self.href);
+    fetch(customerLink, { method: "DELETE" })
+      .then(res => this.loadTraining())
+      .then(res => this.setSate({open: true, message: "Training Deleted"}))
       .catch(err => console.error(err));
   };
   
@@ -68,17 +81,29 @@ class TrainingList extends Component {
              },
              {
                Header: "Duration",
-               accessor: "duration"
+               accessor: "duration",
+               width: 150,
              },
              {
                Header: "Activity",
                accessor: "activity"
+             },
+             {
+              Header: " ",
+              accessor: "links[10.href",
+              filterable: false,
+              sortable: false,
+              width: 100,
+              Cell: ({value}) => (
+                <DeleteTraining deleteTrainingN={this.deleteTraining} link={value} />
+                )
              }
            ];
 
     return (
       <div>
           <Dialog
+          fullScreen
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
