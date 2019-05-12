@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-
+import moment from "moment";
 
 class PTCustomer extends Component {
   constructor(props) {
@@ -21,6 +21,11 @@ class PTCustomer extends Component {
       .catch(err => console.error(err));
   };
 
+  //date is string 
+  formatDate(date) {
+    return moment(parseInt(date)).format('DD/MM/YYYY');
+  }
+  
   render() {
     const columns = [
       {
@@ -65,7 +70,12 @@ class PTCustomer extends Component {
       },
       {
         Header: "Date",
-        accessor: "date"
+        accessor: "date",
+        Cell: ({value}) => ( 
+          <div>
+            {this.formatDate(value)}
+          </div>
+        )
       },
       {
         Header: "Duration",
@@ -92,3 +102,8 @@ class PTCustomer extends Component {
 }
 
 export default PTCustomer;
+
+
+// //How to use moment to format time
+// var formatDate= 1399919400000;
+// var responseDate = moment(formatDate).format('DD/MM/YYYY');

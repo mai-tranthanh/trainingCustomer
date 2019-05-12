@@ -7,8 +7,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import AddTraining from "./AddTraining"
-import DeleteTraining from "./DeleteTraining"
+import AddTraining from "./AddTraining";
+import DeleteTraining from "./DeleteTraining";
 
 
 class TrainingList extends Component {
@@ -72,12 +72,12 @@ class TrainingList extends Component {
       .then(res => this.setSate({open: true, message: "Training Deleted"}))
       .catch(err => console.error(err));
   };
-  
+
   render() {
     const columns = [
             {
                Header: "Date",
-               accessor: "date"
+               accessor: "date",
              },
              {
                Header: "Duration",
@@ -90,7 +90,7 @@ class TrainingList extends Component {
              },
              {
               Header: " ",
-              accessor: "links[10.href",
+              accessor: "links[0].href",
               filterable: false,
               sortable: false,
               width: 100,
@@ -108,9 +108,9 @@ class TrainingList extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Customer ID Record</DialogTitle>
+          <DialogTitle id="form-dialog-title">Training History</DialogTitle>
           <DialogContent>
-            <DialogContentText>Here is the past training session of customer ID </DialogContentText>
+            <DialogContentText>Here is the past training session of customer </DialogContentText>
 
            <ReactTable
                data={this.state.trainings}

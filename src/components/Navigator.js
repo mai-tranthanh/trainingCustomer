@@ -21,7 +21,7 @@ class Navigator extends Component {
      
         {/* <Link className="navbar-brand" to="/">Home</Link> */}
           <ul className="navbar-nav mr-auto ">
-            <li className="nav-item active">
+            <li className="nav-item">
               <Link className="nav-link" to="/">Customer List</Link>
             </li>
             <li className="nav-item">
@@ -35,7 +35,7 @@ class Navigator extends Component {
             </li>
           </ul>
           <ul className="navbar-nav ml-auto">
-            {logLink}
+            {/* {logLink} */}
           </ul>        
         
       </nav>        

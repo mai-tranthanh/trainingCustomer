@@ -10,6 +10,7 @@ import Login from './components/Login';
 import { firebaseAuth } from './config';
 import TrainingListAll from "./components/TrainingListAll";
 import PTCustomer from "./components/PTCustomer";
+import Calendar from "./components/Calendar";
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
   <Route {...rest} render={props => (
@@ -59,9 +60,10 @@ class App extends Component {
             <Route path ="/training" component={TrainingListAll} />
             <Route path ="/pt" component={PTCustomer} />
             <Route path ="/login" component={Login} />
-            <PrivateRoute isAuthenticated={this.state.isAuthenticated} 
-              path ="/calendar" render={() => <h1>Contact Address</h1>} />
+            <Route path ="/calendar" component={Calendar} />
             <Route render={() => <h1>Page not found</h1>} />
+            {/* <PrivateRoute isAuthenticated={this.state.isAuthenticated} 
+              path ="/calendar" render={() => <h1>Contact Address</h1>} /> */}
           </Switch>
 
         </BrowserRouter>

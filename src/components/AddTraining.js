@@ -15,6 +15,7 @@ class AddTraining extends Component {
       date: "",
       duration: "",
       activity: "",
+      customer:"",
       session: []
     };
   }
@@ -37,6 +38,7 @@ class AddTraining extends Component {
         date: this.state.date,
         duration: this.state.duration,
         activity: this.state.activity,
+       // customer : "https://localhost:8080/api/customers/2"
       }
       this.props.updateTraining(newTraining);
       this.handleClose();
@@ -75,13 +77,13 @@ class AddTraining extends Component {
               label="Activity"
               fullWidth
             />
-            <TextField
+            {/* <TextField
               onChange={this.handleChange}
               margin="dense"
               name="customerId"
               label="Customer ID"
               fullWidth
-            />
+            /> */}
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">

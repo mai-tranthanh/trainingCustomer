@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import Snackbar from "@material-ui/core/Snackbar";
-import AddTraining from "./AddTraining";
 import DeleteTraining from "./DeleteTraining";
+// import AddTraining from "./AddTraining";
+
 
 //use rcc snippet to auto-create class
 class TrainingListAll extends Component {
@@ -53,7 +54,7 @@ class TrainingListAll extends Component {
     const columns = [
       {
         Header: "Date",
-        accessor: "date"
+        accessor: 'date',
       },
       {
         Header: "Duration",
@@ -80,7 +81,7 @@ class TrainingListAll extends Component {
 
     return (
       <div>
-        <AddTraining saveTraining={this.saveTraining} />
+        {/* <AddTraining saveTraining={this.saveTraining} /> */}
         <ReactTable
           data={this.state.trainings}
           columns={columns}
