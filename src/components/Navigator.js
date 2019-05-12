@@ -35,7 +35,7 @@ class Navigator extends Component {
             </li>
           </ul>
           <ul className="navbar-nav ml-auto">
-            {/* {logLink} */}
+            {logLink}
           </ul>        
         
       </nav>        

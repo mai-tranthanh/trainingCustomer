@@ -60,10 +60,9 @@ class App extends Component {
             <Route path ="/training" component={TrainingListAll} />
             <Route path ="/pt" component={PTCustomer} />
             <Route path ="/login" component={Login} />
-            <Route path ="/calendar" component={Calendar} />
+            <PrivateRoute isAuthenticated={this.state.isAuthenticated} 
+              path ="/calendar" component={Calendar} />
             <Route render={() => <h1>Page not found</h1>} />
-            {/* <PrivateRoute isAuthenticated={this.state.isAuthenticated} 
-              path ="/calendar" render={() => <h1>Contact Address</h1>} /> */}
           </Switch>
 
         </BrowserRouter>
